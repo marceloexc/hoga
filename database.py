@@ -23,5 +23,6 @@ def create_table():
         cur.execute('''
             CREATE TABLE IF NOT EXISTS metadata_table( 
             identifier TEXT PRIMARY KEY,
-            file_path TEXT);
+            file_path TEXT,
+            media TEXT);
             ''')

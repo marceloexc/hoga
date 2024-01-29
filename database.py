@@ -22,7 +22,8 @@ def create_table():
         cur = get_db().cursor()
         cur.execute('''
             CREATE TABLE IF NOT EXISTS metadata_table( 
-            identifier TEXT PRIMARY KEY,
+            identifier INT PRIMARY KEY,
             file_path TEXT,
-            media TEXT);
+            media TEXT,
+            date TEXT);
             ''')

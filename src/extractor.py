@@ -15,13 +15,14 @@ class Extractor:
         self.platform = ""
         self.regex_identifier = ""
 
-    def glob_files(self, root_path, extensions, pattern=None) -> List[None]:
+    def glob_files(self, root_path, extensions, pattern=None) -> List[str]:
         files_found = []
         for ext in extensions:
-            files_found.extend(Path(root_path).rglob(ext))
+            files_found.extend(str(p) for p in Path(root_path).rglob(ext))
         if pattern:
-            files_found = [f for f in files_found if pattern in f.name]
+            files_found = [f for f in files_found if pattern in Path(f).name]
         return files_found
+
 
 
     # these should go in their own sep util.py file

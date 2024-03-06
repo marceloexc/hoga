@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for result in results %}
+    <div style="border:1px solid black; margin: 15px;" >
+        <p>{{ result | tojson(indent=4) }}</p>
+        {% for media_file in result.media_files %}
+            {% if media_file.endswith('.jpg') or media_file.endswith('.png') %}
+                <img src="{{ url_for('static', filename=media_file) }}" alt="media file">
+            {% elif media_file.endswith('.mp4') %}
+                <video controls>
+                    <source src="{{ url_for('static', filename=media_file) }}" type="video/mp4">
+                </video>
+            {% endif %}
+        {% endfor %}
+        <h3>JSON File Contents:</h3>
+
+        <pre>
+        <code>
+            {{ read_file(result.metadata_file_path) }}
+        </code>
+        </pre>
+    </div>
+{% endfor %}
+
+
+</body>
+</html>

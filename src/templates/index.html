@@ -1,38 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <style>
-        .media-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .media-grid img,
-        .media-grid video {
-            margin: 10px;
-            max-width: 200px;
-            height: auto;
-            object-fit: contain;
-        }
-    </style>
+	<title>Anekdote</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}" />
 </head>
+
+<header>
+	<img src="{{ url_for('static', filename='images/henry_faceonly.svg') }}">
+	<h2 class="white">
+		HOGA
+	</h2>
+</header>
 <body>
-<form method="POST">
-    <input type="text" name="image_folder" placeholder="Enter image folder path">
-    <input type="submit" value="Submit">
-</form>
-<div class="media-grid">
-    {% for url in image_urls %}
-        {% if url.endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
-            <img loading="lazy" src="{{ url }}" alt="media">
-            {# TODO: add attributes for width and height so that
-               media doesnt "jump" when page gets loaded #}
-        {% elif url.endswith(('.mp4')) %}
-            <video controls width="200">
-                <source src="{{ url }}" type="video/mp4">
-            </video>
-        {% endif %}
-    {% endfor %}
+	
+	<div class="henry">
+	</div>
+	
+	
+<div class="header">
+	<h1>
+		Welcome to HOGA!
+	</h1>
+	<p>
+		If you see this page, the HOGA server is sucessfully installed. Further Configuration is required.
+	</p>
 </div>
+
+<div class="post">
+	<h3>
+		This is an H3
+	</h3>
+	<h4>
+		This is an H4
+	</h4>
+</div>
+
+
+<h3 class = "hello white">Information</h3>
+<h4>
+	Running HOGA client private beta 0.1
+</h4>
+
+    <form method="POST">
+        <input type="text" name="image_folder" placeholder="Enter image folder path">
+        <input type="submit" value="Submit">
+    </form>
+
 </body>
 </html>

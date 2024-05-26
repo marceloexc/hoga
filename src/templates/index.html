@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class = "hello white">Information</h3>
+<h4>
+    Running HOGA client private beta 0.1
+</h4>
+
+<form method="POST">
+    <input type="text" name="image_folder" placeholder="Enter image folder path">
+    <input type="submit" value="Submit">
+</form>
+
+{% for directory in directories %}
+<a href="{{ url_for('render_gallery', hoga_id=directory.hoga_id) }}">View Gallery</a>
+
+<br>
+{% endfor %}
+
+
+{% endblock %}

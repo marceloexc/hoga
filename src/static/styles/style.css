@@ -1,0 +1,125 @@
+
+
+body {
+  font-family: Verdana, sans-serif;
+  margin: 0;
+  background-color: #b1c0d6;
+}
+
+.white {
+  color: white;
+}
+
+h2 {
+  margin: 0;
+}
+h1 {
+    font-family: Tahoma, sans-serif;
+}
+
+h3, h4 {
+  position: relative; /* Add this to make the position relative */
+  margin: 0; /* Remove margin to eliminate the gap */
+  display: inline-block; /* Display the paragraph as inline-block */
+}
+
+.hello {
+  background-color: #e34f05;
+  padding-inline: 0.8rem;
+  padding-block: 0;
+  display: inline-block;
+  position: relative; /* Add this to make the position relative */
+  margin: 0; /* Remove margin to eliminate the gap */
+  margin-right: 2.3em;
+}
+
+
+/* Add the following styles for the rectangle */
+.hello::after {
+  content: "";
+  position: absolute;
+  bottom: 0; /* Position it at the bottom */
+  left: 100%; /* Position it to the right of the paragraph */
+  width: 50%; /* 1/4 of the width */
+  height: 25%; /* 1/4 of the height */
+  background-color: #e34f05; /* Color of the rectangle */
+  max-width: 35px;
+  
+}
+
+.header {
+  display: inline;
+}
+
+.post {
+  border: solid 1px black;
+  margin: 1em;
+}
+
+header {
+  border-bottom: 1px solid black;
+  margin: 0;
+  align-items: center;
+  display: flex;
+  padding: 0 1.2em;
+  height: 3em;
+  background-color: #52687b;
+  margin-bottom: 2em;
+}
+
+header h2 {
+  margin: 0;
+}
+
+header img {
+    height: 95%; /* Ensure the image takes up the full height of the header */
+    object-fit: cover; /* Ensure the image covers the entire container */
+    margin-right: 1.2em; /* Optional: add spacing between the image and text */
+}
+
+.henry {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url("../images/henry_fullbody.svg") bottom -2em right -2.4em no-repeat;
+}
+
+.red {
+  color: #124a8a  ;
+}
+
+
+/* spacing */
+ table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-block: 3px solid black;
+  background-color: #6d8ba4;
+  
+}
+
+
+th,
+td {
+  padding: 0.3em ;
+  border-block: 1px solid black;
+
+}
+
+tbody tr {
+  background-color: #b9c8df;
+}
+
+/* thead, tfoot {
+  color: white;
+} */
+
+img {
+  margin: 10px;
+  max-width: 200px;
+  height: auto;
+  object-fit: contain;
+}

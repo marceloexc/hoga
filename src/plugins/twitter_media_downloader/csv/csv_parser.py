@@ -72,11 +72,14 @@ class TweetRow:
 
     @property
     def tweet_retweet_count(self):
-        return int(self.row[12])
+        if self.row[11].isdigit():
+            return int(self.row[11])
+        else:
+            return 0
 
     @property
     def tweet_favorite_count(self):
-        return int(self.row[13])
+        return int(self.row[12])
 
     @property
     def tweet_status_uuid(self):

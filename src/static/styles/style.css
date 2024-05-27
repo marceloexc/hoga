@@ -51,11 +51,16 @@ h3, h4 {
   display: inline;
 }
 
-.post {
-  border: solid 1px black;
-  margin: 1em;
+.media {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
 
+.post {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
 header {
   border-bottom: 1px solid black;
   margin: 0;

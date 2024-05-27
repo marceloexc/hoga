@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if requested_gallery %}
+        <h3>
+            Tweets:
+        </h3>
+
+        <div class="media">
+        {% for post in requested_gallery %}
+            <div class="post">
+                <p>
+                    {{ post.post_content }}
+                </p>
+
+                <p>
+                    Number of likes: {{ post.post_like_count }}
+                </p>
+
+                <p>
+                    Number of retweets: {{ post.post_repost_count }}
+                </p>
+
+                {% for filename, path in post.media_filenames.items() %}
+                    <img src="/images/{{ filename }}" alt="Image">
+                {% endfor %}
+            </div>
+        {% endfor %}
+        </div>
+
+    {% else %}
+        <p>
+            An error has occurred!
+        </p>
+    {% endif %}
+{% endblock %}

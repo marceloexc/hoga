@@ -6,15 +6,15 @@
     Running HOGA client private beta 0.1
 </h4>
 
-<form method="POST">
+<form method="POST" action="/update">
     <input type="text" name="image_folder" placeholder="Enter image folder path">
     <input type="submit" value="Submit">
 </form>
 
 {% for directory in directories %}
-<a href="{{ url_for('render_gallery', hoga_id=directory.hoga_id) }}">View Gallery</a>
+    <a href="{{ url_for('render_gallery', hoga_id=directory.hoga_id) }}">View Gallery for {{ directory.title }}</a>
 
-<br>
+    <br>
 {% endfor %}
 
 

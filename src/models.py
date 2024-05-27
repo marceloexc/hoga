@@ -1,6 +1,6 @@
 # models.py
 
-from sqlalchemy import Column, Integer, String, JSON, ForeignKey
+from sqlalchemy import Column, Integer, String, JSON, ForeignKey, DATETIME
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -20,7 +20,6 @@ class Post(Base):
     __tablename__ = "posts"
 
     post_id = Column(Integer, primary_key=True, index=True)
-    internal_file_directory = Column(String(200), nullable=True)
     media_filenames = Column(JSON, nullable=True)
     post_content = Column(String(900), nullable=True)
     post_type = Column(String(30), nullable=True)
@@ -36,6 +35,14 @@ class Post(Base):
     post_comments_count = Column(String(30), nullable=True)
     repost_original_post_id = Column(String(30), nullable=True)
     post_privacy_settings = Column(String(30), nullable=True)
-    test_filename = Column(JSON, nullable=True)
-
     directory_id = Column(Integer, ForeignKey('directories.hoga_id'), nullable=False)
+
+    # post_date = Column(DATETIME )
+
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    email = Column(String, unique=True, index=True)

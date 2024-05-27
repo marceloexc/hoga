@@ -1,4 +1,3 @@
-/src/misc/twitter_gallery_dl.py
 /temp.py
 # Default ignored files
 .idea/
@@ -62,3 +61,4 @@ local_settings.py
 # Flask stuff:
 instance/
 .webassets-cache
+/.idea/

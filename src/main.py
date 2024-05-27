@@ -1,44 +1,68 @@
-from fastapi import FastAPI, Request, Form, Depends
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, Depends, HTTPException, Request, Form
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
-from sqlalchemy.future import select
-from sqlalchemy.ext.asyncio import AsyncSession
-from . import database, models
-from .plugins.twitter_media_downloader import furyutei_twitter_media_downloader
+from sqlalchemy.orm import Session
+from .database import SessionLocal, engine
+from .models import User, Base, Directory, Post
+
+import os
+
+from src.plugins.twitter_media_downloader import furyutei_twitter_media_downloader, fetcher
 
 app = FastAPI()
+
+# create database columns
+Base.metadata.create_all(bind=engine)
 
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
 templates = Jinja2Templates(directory="src/templates")
 
-@app.on_event("startup")
-async def on_startup():
-    await database.init_db()
 
-# Dependency to get DB session
-async def get_db():
-    async with database.SessionLocal() as session:
-        yield session
+# database dependency, dunno how i feel about this being in main.py
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
 
 @app.get("/", response_class=HTMLResponse)
-async def get_index(request: Request, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(models.Directory))
-    directories = result.scalars().all()
-    return templates.TemplateResponse("index.html", {"request": request, "directories": directories})
+def get_index(req: Request, db: Session = Depends(get_db)):
+    directories = db.query(Directory).all()
+    return templates.TemplateResponse(
+        "index.html",
+        context={"request": req, "directories": directories}
+    )
 
-@app.post("/", response_class=HTMLResponse)
-async def post_index(request: Request, image_folder: str = Form(...), db: AsyncSession = Depends(get_db)):
-    print("MY IMAGE FOLDER " + image_folder)
-    downloader = furyutei_twitter_media_downloader.TwMediaDownloader(image_folder, db)
-    await downloader.process_directory(image_folder)
-    return templates.TemplateResponse("index.html", {"request": request, "user": downloader})
+# this is how you do a post in fastapi. I have no idea what im reading
+@app.post("/update", response_class=HTMLResponse)
+def post_query(image_folder: str = Form(...)):
+    downloader = (furyutei_twitter_media_downloader.TwMediaDownloader(image_folder).process_directory(image_folder))
+    print(f'{image_folder} object created!')
 
-# Define the render_gallery route
-@app.get("/gallery/{hoga_id}", response_class=HTMLResponse)
-async def render_gallery(request: Request, hoga_id: int, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(models.Directory).filter(models.Directory.hoga_id == hoga_id))
-    directory = result.scalars().first()
-    if directory is None:
-        return HTMLResponse(status_code=404, content="Directory not found")
-    return templates.TemplateResponse("gallery.html", {"request": request, "directory": directory})
+
+
+
+@app.get("/gallery/{hoga_id}")
+def render_gallery(req: Request, hoga_id:int, db: Session = Depends(get_db)):
+    requested_gallery = fetcher.fetch(hoga_id, db)
+    return templates.TemplateResponse("render_gallery.html",
+                                      context={
+                                          "request":req,
+                                          "requested_gallery": requested_gallery
+                                      })
+
+
+@app.get("/images/{filename}")
+def get_image(filename: str, db: Session = Depends(get_db)):
+    directory = db.query(Post).filter(Post.media_filenames.contains(filename)).first()
+    if not directory:
+        raise HTTPException(status_code=404, detail="Image not found")
+
+    path = directory.media_filenames[filename]
+    if not os.path.exists(path):
+        raise HTTPException(status_code=404, detail="Image not found")
+
+    return FileResponse(path)

@@ -82,16 +82,6 @@ header img {
     margin-right: 1.2em; /* Optional: add spacing between the image and text */
 }
 
-.henry {
-  z-index: -1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: url("../images/henry_fullbody.svg") bottom -2em right -2.4em no-repeat;
-}
-
 .red {
   color: #124a8a  ;
 }
@@ -127,4 +117,27 @@ img {
   max-width: 200px;
   height: auto;
   object-fit: contain;
+}
+
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: auto;
+  border: solid 1px black;
+
+}
+
+
+.gallery-information {
+  box-sizing: border-box;
+  display: inline-block;
+  flex-wrap: wrap;
+  max-width: 32%;
+  border: 1px solid red;
+}
+
+.gallery-information img {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }

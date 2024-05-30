@@ -6,27 +6,36 @@
             Tweets:
         </h3>
 
-        <div class="media">
-        {% for post in requested_gallery %}
-            <div class="post">
-                <p>
-                    {{ post.post_content }}
-                </p>
 
-                <p>
-                    Number of likes: {{ post.post_like_count }}
-                </p>
+        <div class="gallery-container">
+            <div class="gallery-information">
+                <img src="{{ url_for('static', path='images/henry_faceonly.svg') }}">
+            </div>
+            <div class="media">
+                {% for post in requested_gallery %}
+                    <div class="post">
+                        <p>
+                            {{ post.post_content }}
+                        </p>
 
-                <p>
-                    Number of retweets: {{ post.post_repost_count }}
-                </p>
+                        <p>
+                            Number of likes: {{ post.post_like_count }}
+                        </p>
 
-                {% for filename, path in post.media_filenames.items() %}
-                    <img src="/images/{{ filename }}" alt="Image">
+                        <p>
+                            Number of retweets: {{ post.post_repost_count }}
+                        </p>
+
+                        {% for filename, path in post.media_filenames.items() %}
+                            <img src="/images/{{ filename }}" alt="Image">
+                        {% endfor %}
+                    </div>
                 {% endfor %}
             </div>
-        {% endfor %}
         </div>
+
+
+
 
     {% else %}
         <p>

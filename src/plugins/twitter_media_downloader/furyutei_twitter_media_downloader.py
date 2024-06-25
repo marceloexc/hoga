@@ -8,6 +8,12 @@ import os
 
 from src.database import SessionLocal
 
+import logging
+
+
+logger = logging.getLogger('uvicorn.error')
+logger.setLevel(logging.DEBUG)
+
 
 
 class TwMediaDownloader:
@@ -16,16 +22,12 @@ class TwMediaDownloader:
         self.DIRECTORY_PATH = directory_path
         self.file_paths = []
 
-    def process_directory(self, directory_path):
-        # print(directory_path)
 
-        if os.path.exists(directory_path):
-            # print("Directory exists!~")
-            # TODO add logger serice
-            pass
-        else:
-            # print("Directory doesn't exist")
-            # TODO add logger service
+    def process_directory(self, directory_path):
+        logger.debug(f"Using TwMediaDownloader at {directory_path}")
+
+        if not os.path.exists(directory_path):
+            logger.debug("Aborting - directory does not exist!")
             return
 
         for file in os.listdir(directory_path):
@@ -63,7 +65,6 @@ class TwMediaDownloader:
                 session.commit()
         except Exception as e:
             session.rollback()
-            print(f"An error occured: {e}")
-            # TODO add logger serice
+            logger.error(f"An error occured: {e}")
         finally:
             session.close()

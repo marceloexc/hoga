@@ -1,3 +1,4 @@
+import logging
 import os
 from fastapi import APIRouter, Request, Depends, Form, HTTPException
 from fastapi.responses import HTMLResponse, FileResponse
@@ -5,10 +6,16 @@ from sqlalchemy.orm import Session
 
 from src.database import get_db
 from src.models import Directory, Post
-from src.plugins.twitter_media_downloader import furyutei_twitter_media_downloader, fetcher
-from src.shared import templates  # Import templates from shared
+from src.plugins.twitter_media_downloader import furyutei_twitter_media_downloader
+from src.utils import fetcher
+from src.shared import templates
 
 router = APIRouter()
+
+logger = logging.getLogger('uvicorn.error')
+logger.setLevel(logging.DEBUG)
+
+
 
 @router.get("/", response_class=HTMLResponse)
 def get_index(req: Request, db: Session = Depends(get_db)):
@@ -18,10 +25,10 @@ def get_index(req: Request, db: Session = Depends(get_db)):
         context={"request": req, "directories": directories}
     )
 
+
 @router.post("/update", response_class=HTMLResponse)
 def post_query(image_folder: str = Form(...)):
     downloader = (furyutei_twitter_media_downloader.TwMediaDownloader(image_folder).process_directory(image_folder))
-    print(f'{image_folder} object created!')
 
 @router.get("/gallery/{hoga_id}")
 def render_gallery(req: Request, hoga_id: int, db: Session = Depends(get_db)):
@@ -31,6 +38,7 @@ def render_gallery(req: Request, hoga_id: int, db: Session = Depends(get_db)):
                                           "request": req,
                                           "requested_gallery": requested_gallery
                                       })
+
 
 @router.get("/images/{filename}")
 def get_image(filename: str, db: Session = Depends(get_db)):
@@ -43,6 +51,7 @@ def get_image(filename: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Image not found")
 
     return FileResponse(path)
+
 
 @router.get("/items/{item_id}")
 def read_item(item_id):

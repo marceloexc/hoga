@@ -68,8 +68,8 @@ class TweetRow:
 
     @property
     def tweet_reply_count(self):
-        return int(self.row[12])
-
+        # return int(self.row[12])
+        return 12
     @property
     def tweet_retweet_count(self):
         if self.row[11].isdigit():
@@ -79,7 +79,10 @@ class TweetRow:
 
     @property
     def tweet_favorite_count(self):
-        return int(self.row[12])
+        if self.row[12].isdigit():
+            return int(self.row[12])
+        else:
+            return 0
 
     @property
     def tweet_status_uuid(self):
@@ -93,6 +96,7 @@ class TwMediaDownloaderCSVProcessor(CSVFileHandler):
         super().__init__(file_path)
         self.CSV_HEADER_SKIP = 6
 
+
     def create_tweet_objects(self):
         if self.csv_data is None:
             self.read_file()  # Read the file if data is not already loaded
@@ -100,15 +104,16 @@ class TwMediaDownloaderCSVProcessor(CSVFileHandler):
         tweet_objects = {}
         for row in self.csv_data.rows:
             tweet_row = TweetRow(row, self.file_path)
-            tweet_uuid = tweet_row.tweet_status_uuid
+            current_tweet_uuid_in_row = tweet_row.tweet_status_uuid
             # If a tweet object with the same uuid already exists, append the new filename
-            if tweet_uuid in tweet_objects:
-                #help me on this - need to update the image map dict!
-                tweet_objects[tweet_uuid].media_test_local_files.update({})
+            if current_tweet_uuid_in_row in tweet_objects:
 
+                # worst piece of shit unreadable code ive ever written. Sorry to future me. This wont be how
+                # the plugin system works at all...promise...
+                tweet_objects[current_tweet_uuid_in_row].media_test_local_files.update(MediaLinker(os.path.dirname(self.file_path)).link_media(tweet_row.row[7]))
             else:
                 # If it doesn't exist, create a new tweet object
-                tweet_objects[tweet_uuid] = self.create_tweet_object(tweet_row)
+                tweet_objects[current_tweet_uuid_in_row] = self.create_tweet_object(tweet_row)
 
         return tweet_objects.values()
     def create_tweet_object(self, tweet_row):

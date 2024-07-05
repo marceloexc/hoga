@@ -9,5 +9,6 @@ if __name__ == "__main__":
     config = Config()
     config.bind = ["0.0.0.0:5125"]
     config.loglevel = "debug"
+    config.accesslog = '-'
 
     asyncio.run(serve(app, config))

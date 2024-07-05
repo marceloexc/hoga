@@ -1,5 +1,4 @@
 import logging
-
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from src.database import engine
@@ -10,6 +9,11 @@ from src.routes.routes import router
 
 # Initialize FastAPI app
 app = FastAPI()
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+logger.info("Logger initalized.")
 
 # Include routers
 app.include_router(router)

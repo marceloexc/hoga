@@ -1,6 +1,7 @@
 import random
 
 from src import database
+import logging
 from src.models import Post, Directory
 from src.plugins.twitter_media_downloader.csv.csv_parser import TwMediaDownloaderCSVProcessor
 
@@ -8,13 +9,7 @@ import os
 
 from src.database import SessionLocal
 
-import logging
-
-
-logger = logging.getLogger('uvicorn.error')
-logger.setLevel(logging.DEBUG)
-
-
+logger = logging.getLogger(__name__)
 
 class TwMediaDownloader:
     def __init__(self, directory_path, file_extension='.csv'):
@@ -22,12 +17,11 @@ class TwMediaDownloader:
         self.DIRECTORY_PATH = directory_path
         self.file_paths = []
 
-
     def process_directory(self, directory_path):
-        logger.debug(f"Using TwMediaDownloader at {directory_path}")
+        logger.info(f"Using TwMediaDownloader at {directory_path}")
 
         if not os.path.exists(directory_path):
-            logger.debug("Aborting - directory does not exist!")
+            # logger.debug("Aborting - directory does not exist!")
             return
 
         for file in os.listdir(directory_path):
@@ -58,7 +52,7 @@ class TwMediaDownloader:
                     media_filenames=tweet.media_test_local_files,
                     directory_id=directory_entry.hoga_id,
                     post_content=tweet.tweet_content,
-                    post_like_count = tweet.number_of_likes,
+                    post_like_count=tweet.number_of_likes,
                     post_repost_count=tweet.number_of_retweets
                 )
                 session.add(tweet_post)
@@ -67,4 +61,5 @@ class TwMediaDownloader:
             session.rollback()
             logger.error(f"An error occured: {e}")
         finally:
+            logger.info(f"Finished processing gallery at {self.DIRECTORY_PATH}")
             session.close()

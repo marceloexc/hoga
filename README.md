@@ -10,7 +10,7 @@ use plugins from the community to specify what type of content you want to serve
 
 * to make viewing large amounts of archived libraries easy
 
-* the abilitiy to have archived galleries **publicly accessible** with a hoga server (or, keep it as private as you want, and only run on your local machine)
+* the ability to have archived galleries **publicly accessible** with a hoga server (or, keep it as private as you want, and only run on your local machine)
 
 * easy data _in_, easy data _out_. hoga will act as the middleman between the user and the data in its raw format (.json sidecars, .csv files, or even pure sql databases). downloading a hoga gallery will result in a .zip of the exact same data that was used for hoga.
 

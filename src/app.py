@@ -17,7 +17,7 @@ logger.info("Logger initalized.")
 
 # Include routers
 app.include_router(router)
-app.include_router(api_v1)
+app.include_router(api_v1, prefix="/api")
 
 # Create database columns
 Base.metadata.create_all(bind=engine)

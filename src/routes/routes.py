@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from src.database import get_db
 from src.models import Directory, Post
 from src.plugins.twitter_media_downloader import furyutei_twitter_media_downloader
-from src.utils import fetcher
+from src.gallery import fetcher
 from src.shared import templates
 
 router = APIRouter()
@@ -51,8 +51,3 @@ def get_image(filename: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Image not found")
 
     return FileResponse(path)
-
-
-@router.get("/items/{item_id}")
-def read_item(item_id):
-    return {"item_id": item_id}

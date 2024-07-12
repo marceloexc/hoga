@@ -14,6 +14,8 @@ use plugins from the community to specify what type of content you want to serve
 
 * easy data _in_, easy data _out_. hoga will act as the middleman between the user and the data in its raw format (.json sidecars, .csv files, or even pure sql databases). downloading a hoga gallery will result in a .zip of the exact same data that was used for hoga.
 
+hoga is **not** a replacement for raw, pure scraped data. it is merely a specialized data viewer, and none of the source data that is used to create galleries are modified in any way.
+
 ## current status
 
 still in the middle of figuring it out. check back soon^^

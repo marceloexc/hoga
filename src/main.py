@@ -1,14 +1,13 @@
-import asyncio
+import sys
 
-from hypercorn.asyncio import serve
-from hypercorn.config import Config
+import uvicorn
+from uvicorn.config import LOGGING_CONFIG
 
 from src.app import app
 
-if __name__ == "__main__":
-    config = Config()
-    config.bind = ["0.0.0.0:5125"]
-    config.loglevel = "debug"
-    config.accesslog = '-'
+from typing import Any, Dict
 
-    asyncio.run(serve(app, config))
+import logging
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=5125, log_level="debug")

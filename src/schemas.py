@@ -13,7 +13,7 @@ class DirectorySchema(BaseModel):
 
 
 class BPost(BaseModel):
-    post_id = int
+    post_id: int
     post_content: Optional[str]
     post_author_username: Optional[str]
     post_like_count: Optional[int]

@@ -5,14 +5,17 @@
         <h3>
             Tweets:
         </h3>
-
-
         <div class="gallery-container">
             <div class="gallery-information">
                 <img src="{{ url_for('static', path='images/henry_faceonly.svg') }}">
                 <p>
                     Timeline
                 </p>
+                <select>
+                    <option value="datetime">Sort chronologically</option>
+                    <option value="most_rw">Sort by Retweets</option>
+
+                </select>
             </div>
             <div class="timeline-container">
                 {% for post in requested_gallery %}

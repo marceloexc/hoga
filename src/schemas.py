@@ -13,11 +13,11 @@ class DirectorySchema(BaseModel):
 
 
 class BPost(BaseModel):
-    # post_id = int
+    post_id = int
     post_content: Optional[str]
     post_author_username: Optional[str]
     post_like_count: Optional[int]
-    # number_of_retweets: Optional[int]
+    post_repost_count: Optional[int]
     media_filenames: Optional[Dict[str, str]]
 
     class Config:

@@ -22,6 +22,9 @@ def list_galleries(db: Session = Depends(get_db)):
 
 
 @api_v1.get("/gallery", response_model=List[BPost])
-def post_listing(db: Session = Depends(get_db)):
-    all_posts = db.query(Post).filter_by(directory_id=90183).all()
+def post_listing(
+        hoga_id: int,
+        db: Session = Depends(get_db)
+):
+    all_posts = db.query(Post).filter_by(directory_id=hoga_id).all()
     return all_posts

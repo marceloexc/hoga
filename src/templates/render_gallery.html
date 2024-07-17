@@ -18,56 +18,7 @@
                 </select>
             </div>
             <div class="timeline-container">
-                {% for post in requested_gallery %}
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-item-header">
-
-                            <img class="timeline-item-avatar" src="{{ url_for('static', path='images/henry_faceonly.svg') }}">
-
-                            <p class="username-text">
-                                {{ post.post_author_username }}
-                            </p>
-
-                        </div>
-
-                        <div class="timeline-item-body">
-                            <p>
-                                {{ post.post_content }}
-                            </p>
-                        </div>
-
-                        <div class="timeline-media">
-
-                            <div class="timeline-media-items">
-
-                                {% for filename, path in post.media_filenames.items() %}
-
-                                    {% if filename.endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
-                                        <img loading="lazy" src="/images/{{ filename }}" alt="Image">
-                                    {% elif filename.endswith(('.mp4')) %}
-                                        <video controls preload="none">
-                                        <source src="/images/{{ filename }}" alt="Video">
-                                        </video>
-                                    {% endif %}
-
-                                {% endfor %}
-
-                            </div>
-                        </div>
-
-                        <div class="timeline-item-footer">
-                            <p class="timeline-item-footer-stats">
-                                Number of likes: {{ post.post_like_count }}
-                            </p>
-
-                            <p class="timeline-item-footer-stats">
-                                Number of retweets: {{ post.post_repost_count }}
-                            </p>
-                        </div>
-                    </div>
-                {% endfor %}
+                    {% include 'partials/timeline/timeline-item.html' %}
             </div>
         </div>
 

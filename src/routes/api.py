@@ -1,18 +1,18 @@
+from typing import List
+
 from fastapi import APIRouter, Depends
-from fastapi.openapi.docs import get_swagger_ui_html
 from sqlalchemy.orm import Session
 
 from src.database import get_db
 from src.models import Directory, Post
-from src.schemas import DirectorySchema, BPost
-from typing import List
+from src.schemas import DirectorySchema, GalleryResponse
 
 api_v1 = APIRouter()
 
 
-@api_v1.get("/")
+@api_v1.get("/status")
 def index():
-    return {"message": "Hello, World!"}
+    return "Running! (Go catch it!!!)"
 
 
 @api_v1.get("/list", response_model=List[DirectorySchema])
@@ -21,10 +21,10 @@ def list_galleries(db: Session = Depends(get_db)):
     return directories
 
 
-@api_v1.get("/gallery", response_model=List[BPost])
+@api_v1.get("/galleries", response_model=GalleryResponse)
 def post_listing(
         hoga_id: int,
         db: Session = Depends(get_db)
 ):
     all_posts = db.query(Post).filter_by(directory_id=hoga_id).all()
-    return all_posts
+    return {"gallery": all_posts}

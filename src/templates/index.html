@@ -2,23 +2,29 @@
 
 {% block content %}
 
+    <section>
 
-<form method="POST" action="/update">
-    <label>
-        <input type="text" name="image_folder" placeholder="Enter image folder path">
-    </label>
-    <input type="submit" value="Submit">
-</form>
+        <div class="index">
+        <form method="POST" action="/update">
+            <label>
+                <input type="text" name="image_folder" placeholder="Enter image folder path">
+            </label>
+            <input type="submit" value="Submit">
+        </form>
 
-    <br>
+            <h3 class = "hello white">Processed Galleries</h3>
 
-    <h3 class = "hello white">Processed Galleries</h3>
-    <br>
-{% for directory in directories %}
-    <a href="{{ url_for('render_gallery', hoga_id=directory.hoga_id) }}">View Gallery for {{ directory.title }}</a>
+            <br>
 
-    <br>
-{% endfor %}
+            {% for directory in directories %}
+
+                <a href="{{ url_for('render_gallery', hoga_id=directory.hoga_id) }}">View Gallery for {{ directory.title }}</a>
+
+            <br>
+        {% endfor %}
+        </div>
+
+    </section>
 
 
 {% endblock %}

@@ -1,0 +1,33 @@
+body {
+  font-family: $body_font;
+  margin: 0;
+  background: $background;
+}
+
+header {
+  display: flex;
+  margin: 0;
+  align-items: center;
+  height: 1.5em;
+  background-color: $background;
+
+  h2 {
+    margin: 0;
+  }
+
+  img {
+    height: 95%;
+    object-fit: cover;
+    margin-right: 1.2em;
+  }
+}
+
+section {
+  background-color: $b_low;
+  color: $background;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 0.5em;
+
+  min-height: calc(100vh - 30px);
+}

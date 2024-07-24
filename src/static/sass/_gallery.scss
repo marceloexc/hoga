@@ -1,0 +1,16 @@
+.gallery-container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+
+  .gallery-information {
+    background-color: $b_med;
+    padding: 20px;
+    top: 0;
+    min-height: calc(50vh - 30px);
+  }
+
+  .timeline-container {
+    padding: 20px;
+    max-width: 1200px;
+  }
+}

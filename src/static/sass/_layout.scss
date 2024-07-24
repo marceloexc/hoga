@@ -7,6 +7,7 @@ body {
 header {
   display: flex;
   margin: 0;
+  margin-inline: 1em;
   align-items: center;
   height: 1.5em;
   background-color: $background;
@@ -24,10 +25,45 @@ header {
 
 section {
   background-color: $b_low;
-  color: $background;
-  padding: 1em;
-  margin: 1em;
-  border-radius: 0.5em;
+  padding: 0.5em;
+  margin: 0.5em;
 
+  border: solid 1px $f_high;
+  border-radius: 0.5em;
   min-height: calc(100vh - 30px);
 }
+
+.banner {
+  color: $f_inv;
+  background-color: $f_med;
+  padding-inline: 0.8rem;
+  padding-block: 0;
+  display: inline-block;
+  position: relative;
+  margin: 0 2.3em 0 0;
+}
+
+// For some reason, I can't do nested ::after's
+// with python's libsass once it compiles, so I
+// have to do it seperately
+
+.banner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 50%;
+  height: 25%;
+  background-color: $f_med;
+  max-width: 35px;
+}
+
+a {
+  color: $f-med;
+  font-family: $header_font !important;
+}
+
+a::after {
+  content: '→';
+}
+

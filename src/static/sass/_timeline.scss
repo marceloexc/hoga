@@ -1,0 +1,28 @@
+.timeline-item {
+  overflow-wrap: break-word;
+  padding: 0.5em;
+  border: 1px solid $f_high;
+}
+
+.timeline-media {
+  display: grid;
+  width: 100%;
+  max-height: 600px;
+  overflow: hidden;
+
+  .timeline-media-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow: hidden;
+    flex-grow: 1;
+
+    img {
+      margin: 10px;
+      max-width: 200px;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+}

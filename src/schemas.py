@@ -1,6 +1,6 @@
-from typing import Dict, Optional
+from typing import Dict, Optional, List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl
 
 
 class DirectorySchema(BaseModel):
@@ -9,7 +9,7 @@ class DirectorySchema(BaseModel):
     extractor_type: None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class BPost(BaseModel):
@@ -21,4 +21,16 @@ class BPost(BaseModel):
     media_filenames: Optional[Dict[str, str]]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+
+class GalleryResponse(BaseModel):
+    gallery: List[BPost]
+
+    class Config:
+        from_attributes = True
+
+
+class ImageResponseSchema(BaseModel):
+    url: HttpUrl
+    name: str

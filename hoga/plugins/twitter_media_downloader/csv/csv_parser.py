@@ -1,9 +1,9 @@
 import os
 from datetime import datetime
 
-from src.plugins.twitter_media_downloader.models import TwMediaDownloader_Tweet
-from src.utils.csv_processor import CSVFileHandler
-from src.utils.linker import MediaLinker
+from hoga.plugins.twitter_media_downloader.models import TwMediaDownloader_Tweet
+from hoga.utils.csv_processor import CSVFileHandler
+from hoga.utils.linker import MediaLinker
 
 class TweetRow:
 

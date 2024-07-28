@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 
-from src.database import get_db
+from hoga.database import get_db
 
 media = APIRouter()
 

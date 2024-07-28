@@ -1,13 +1,12 @@
 import random
 
-from src import database
 import logging
-from src.models import Post, Directory
-from src.plugins.twitter_media_downloader.csv.csv_parser import TwMediaDownloaderCSVProcessor
+from hoga.models import Post, Directory
+from hoga.plugins.twitter_media_downloader.csv.csv_parser import TwMediaDownloaderCSVProcessor
 
 import os
 
-from src.database import SessionLocal
+from hoga.database import SessionLocal
 
 logger = logging.getLogger(__name__)
 

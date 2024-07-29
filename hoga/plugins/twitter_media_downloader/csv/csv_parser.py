@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from hoga.plugins.twitter_media_downloader.models import TwMediaDownloader_Tweet
+from ....plugins.twitter_media_downloader.models import TwMediaDownloader_Tweet
 from hoga.utils.csv_processor import CSVFileHandler
 from hoga.utils.linker import MediaLinker
 

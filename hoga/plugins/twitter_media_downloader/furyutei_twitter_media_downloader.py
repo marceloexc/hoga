@@ -2,7 +2,7 @@ import random
 
 import logging
 from hoga.models import Post, Directory
-from hoga.plugins.twitter_media_downloader.csv.csv_parser import TwMediaDownloaderCSVProcessor
+from ...plugins.twitter_media_downloader.csv.csv_parser import TwMediaDownloaderCSVProcessor
 
 import os
 

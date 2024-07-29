@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from hoga.database import get_db
 from hoga.models import Directory, Post
-from hoga.plugins.twitter_media_downloader import furyutei_twitter_media_downloader
+from ..plugins.twitter_media_downloader import furyutei_twitter_media_downloader
 from hoga.gallery import fetcher
 from hoga.shared import templates
 

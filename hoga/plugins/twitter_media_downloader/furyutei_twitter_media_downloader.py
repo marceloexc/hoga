@@ -48,6 +48,7 @@ class TwMediaDownloader:
                 tweet_post = Post(
                     post_id=tweet.tweet_uuid,
                     post_author_username=tweet.username,
+                    post_author_handle=tweet.display_name,
                     media_filenames=tweet.media_test_local_files,
                     directory_id=directory_entry.hoga_id,
                     post_content=tweet.tweet_content,

@@ -4,6 +4,42 @@
   border: 1px solid $f_high;
 }
 
+.item-meta {
+  display: flex;
+  gap: 1em;
+  max-width: 100%;
+  overflow: hidden;
+
+  .avatar-container {
+    box-sizing: border-box;
+
+    .avatar-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 4px;
+    }
+  }
+
+  .name-container {
+    box-sizing: border-box;
+    flex-grow: 4;
+    flex-shrink:4;
+  }
+
+  .item-information {
+    span {
+      color: $f_low;
+    }
+  }
+}
+
+.item-content {
+  p {
+    line-height: 1.3em;
+    display:inline;
+    margin: 0;
+  }
+}
 .timeline-media {
   display: grid;
   width: 100%;
@@ -25,4 +61,16 @@
       object-fit: contain;
     }
   }
+}
+
+.item-engagements {
+  margin-bottom: -1em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+
+.username {
+  color: $f-med;
+  font-family: $header-font;
 }

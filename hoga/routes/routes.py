@@ -4,11 +4,11 @@ from fastapi import APIRouter, Request, Depends, Form, HTTPException
 from fastapi.responses import HTMLResponse, FileResponse
 from sqlalchemy.orm import Session
 
-from src.database import get_db
-from src.models import Directory, Post
-from src.plugins.twitter_media_downloader import furyutei_twitter_media_downloader
-from src.gallery import fetcher
-from src.shared import templates
+from hoga.database import get_db
+from hoga.models import Directory, Post
+from ..plugins.twitter_media_downloader import furyutei_twitter_media_downloader
+from hoga.gallery import fetcher
+from hoga.shared import templates
 
 router = APIRouter()
 

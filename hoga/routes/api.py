@@ -3,9 +3,9 @@ from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from src.database import get_db
-from src.models import Directory, Post
-from src.schemas import DirectorySchema, GalleryResponse
+from hoga.database import get_db
+from hoga.models import Directory, Post
+from hoga.schemas import DirectorySchema, GalleryResponse
 
 api_v1 = APIRouter()
 

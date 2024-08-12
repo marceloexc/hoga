@@ -2,12 +2,12 @@ import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from src.database import engine
-from src.models import Base
-from src.routes.media import media
-from src.routes.api import api_v1
-from src.routes.routes import router
-from src.utils.compile_scss import compile_scss
+from hoga.database import engine
+from hoga.models import Base
+from hoga.routes.media import media
+from hoga.routes.api import api_v1
+from hoga.routes.routes import router
+from hoga.utils.compile_scss import compile_scss
 
 
 @asynccontextmanager
@@ -33,5 +33,5 @@ app.include_router(media, prefix="/media")
 Base.metadata.create_all(bind=engine)
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="hoga/static"), name="static")
 

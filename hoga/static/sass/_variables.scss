@@ -10,6 +10,22 @@ $b_med: #CEC7C0;
 $b_low: #E9E2D8;
 $b_inv: #8c5a3d;
 
+
+
+:root {
+  --background: #{$background};
+
+  --f_high: #{$f_high};
+  --f_med: #{$f_med};
+  --f_low: #{$f_low};
+  --f_inv: #{$f_inv};
+
+  --b_high: #{$b_high};
+  --b_med: #{$b_med};
+  --b_low: #{$b_low};
+  --b_inv: #{$b_inv};
+}
+
 // fonts
 
 $body_font: Verdana, sans-serif;

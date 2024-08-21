@@ -4,12 +4,12 @@ body {
   background: $background;
 }
 
-header {
+.pageheader {
   display: flex;
   margin: 0;
   margin-inline: 1em;
   align-items: center;
-  height: 1.5em;
+  height: 3rem;
   background-color: $background;
 
   h2 {
@@ -23,14 +23,54 @@ header {
   }
 }
 
+nav {
+  display: flex;
+  margin-inline: 0.8em;
+  height: 2rem;
+  //margin-bottom: -10px; /* This will make the nav overlap the section */
+  z-index: 10; /* Ensure nav stays above the section */
+
+  .tab {
+    height: 2rem;
+    min-width: 4rem;
+    border-radius: 15px 15px 0 0;
+    border: 1px solid var(--f_high);
+    background-color: var(--b_med);
+    display: flex;
+    align-items: center;
+    margin-right: -1px; /* Slightly overlap tabs */
+    z-index: 2;
+  }
+
+  .tab:hover {
+    background-color: $b-low;
+    transition: 0.3s ease-in-out;
+  }
+
+  .active {
+    background-color: var(--b_low) !important;
+  }
+
+  a {
+    display: flex;
+    width: 160px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    z-index: 3;
+  }
+}
+
 section {
   background-color: $b_low;
   padding: 0.5em;
-  margin: 0.5em;
+  margin-inline: 0.5em;
 
   border: solid 1px $f_high;
   border-radius: 0.5em;
   min-height: calc(100vh - 30px);
+  position: relative;
+  z-index: 9;
 }
 
 .banner {
@@ -63,7 +103,7 @@ a {
   font-family: $header_font !important;
 }
 
-a::after {
+a:not(.link-a)::after {
   content: '→';
 }
 

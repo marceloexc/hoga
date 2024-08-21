@@ -2,3 +2,8 @@
 @import 'layout';
 @import 'timeline';
 @import 'gallery';
+
+
+p, span, h2 {
+  color: $f_high;
+}

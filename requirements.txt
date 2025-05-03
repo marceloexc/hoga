@@ -6,3 +6,4 @@ fastapi-slim
 libsass
 Jinja2
 python-multipart
+jinjax

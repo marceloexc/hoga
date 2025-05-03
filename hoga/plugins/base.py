@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
 from pathlib import Path
+from typing import List, Dict, Any
+
 from sqlmodel import SQLModel, Session
+
 
 class Plugin(ABC):
     """Base class for Plugins"""
